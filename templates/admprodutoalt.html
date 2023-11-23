@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<Br>
+<Br>
+<Br>
+<Br>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <form method="post" action="/addProduto" class="col-sm-10 col-md-8 col-lg-6" enctype="multipart/form-data">
+                        <h1>Alterar/excluir Produtos</h1>
+
+                        <div class="form-floating mb-3">
+                            <select name="Produto" class="">
+                                {% for c in produtos %}
+                                <option value="{{c.id}}">{{c.nome}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {% for c in produtos %}    
+                            <input type="estoque" id="estoque" name="estoque" value="{{ c.estoque }}" class="form-control" placeholder=" " autofocus>
+                            <label for="">Estoque</label>
+                            
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="preco" id="preco" name="preco" value="{{ c.preco }}"class="form-control" placeholder=" " autofocus>
+                            <label for="">Preço</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="nome" id="descricao" name="descricao" value="{{ c.descricao }}" class="form-control" placeholder=" " autofocus>
+                            <label for="">Descrição</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="file" placeholder="Selecione uma imagem" id="imagem" name="imagem" accept="image/*" required><br><br>
+                            
+                        </div>
+                    <div class="form-floating mb-3">
+                        <select name="categoria" class="">
+                            {% for c in categorias%}
+                            <option value="{{c.id}}">{{c.nome}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endfor %}
+                        <button type="submit" class="btn btn-lg btn-danger">criar</button>     
+                    </form>
+                </div>
+            </div>
+            <Br>
+                <Br>
+                <Br>
+                <Br>
+                    <Br>
+                        <Br>
+            {% endblock %}

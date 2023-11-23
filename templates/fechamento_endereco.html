@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<main class="flex-fill">
+    <div class="container" >
+        <h1>Selecione o Endereço de Entrega</h1>
+        <h3 class="mb-4">
+            Selecione o endereço de entrega e clique em <b>Continuar</b> para prosseguir para a <b>seleção da
+                forma de pagamento</b>.
+        </h3>
+
+        {% if enderecoCliente != "" %}
+        <div class="d-flex justify-content-around flex-wrap border rounded-top pt-4 px-3 ">
+            <div class="mb-4 mx-2 flex-even" style="background-color: #abb8c2">
+                <input type="radio" class="btn-check" name="endereco" 
+                    autocomplete="off" id="end1">
+                <label class="btn btn-outline-dark p-4 h-100 w-100"  for="end1">
+                    <h3>
+                        <b class="text-dark">Minha Casa</b><br>
+                        <hr>
+                        <b>Lucio Eduardo</b><br>
+                        Rua João Alvino, {{enderecoNumero}}<br>
+                        Atilio/ES<br>
+                        {{enderecoCliente[:5] + "-" + enderecoCliente[5:]}}
+                    </h3>
+                </label>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center mt-4">
+            <p> Parece que você ainda não possui endereço cadastrado. Registre um:</p>
+            <a href="/cliente_endereco" class="btn btn-primary">Registrar Endereço</a>
+        </div>
+        {% endif %}
+    </div>
+</main>
+                <div class="text-end border border-top-0 rounded-bottom p-4 pb-0">                    
+                    <a href="/fechamento_itens" class="btn btn-outline-success btn-lg mb-4">
+                        Voltar aos Itens
+                    </a>
+                    <a href="/fechamento_pagamento" class="btn btn-danger btn-lg ms-2 mb-4">Continuar</a>
+                </div>
+            </div>
+        </main>
+
+        {% endblock %}

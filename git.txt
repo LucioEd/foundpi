@@ -1,0 +1,9 @@
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJkFJY1X+iu/eh7JzD93lYd8uS1i46n3OFWUn6tbDOAn luciooeduardo1@gmail.com
+
+
+  git init
+  git add README.md
+  git commit -m "first commit"
+  git branch -M main
+  git remote add origin git@github.com:LucioEd/foundpi.git
+  git push -u origin main

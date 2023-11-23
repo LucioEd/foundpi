@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="{{ url_for('static', path='node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='node_modules/bootstrap/bootstrap-icons/font/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/FoundTech.css') }}">  
+
+    <title> FoundTech </title>
+    <style>.btn-danger{
+        
+        background-color:rgb(123, 207, 179);
+        border: solid black 3px;
+        text-decoration: black;
+    }
+    .btn-danger:hover{
+        background-color:rgb(139, 180, 167);
+        border: solid black 3px;
+        
+    }
+        </style>
+</head>
+
+<div class="d-flex flex-column wrapper">
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-black border-bottom shadow-sm ">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="{{ url_for('static', path='/img/foundtech.png') }}" class=""></a> 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target=".navbar-collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/">Home</a>
+                    </li>
+
+                </ul>
+                <div class="align-self-end">
+                    <ul class="navbar-nav">
+                        {% if cliente == False %}
+                        <li class="nav-item">
+                            <a href="/cadastro" class="nav-link text-white">Cadastrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link text-white">Login</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="" href="/cliente"><img class=" p-2 rounded-4 " src="{{ url_for('static', path='\img\cart1.png') }}" alt="Cart"  width="48" ></a>
+                            <a class="" href="/carrinho"><img class=" p-2 rounded-4 " src="{{ url_for('static', path='\img\cart.png') }}" alt="Cart"  width="48" ></a>
+                            <a href="/carrinho" class=" text-white">
+                                <i class="bi-cart" style="font-size:24px;line-height:24px;"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+  {% block conteudo %}
+
+
+
+
+    
+  {% endblock %}
+          <footer class="border-top text-muted bg-black">
+            <div class="container">
+                <div class="row py-3">
+                    <div class="col-12 col-md-4 text-center text-light">
+                        &copy; 2023 - Foundtech Ltda ME<br>
+                        Rua Virtual Inexistente, 171, Compulândia/PC <br>
+                        CPNJ 99.999.999/0001-99
+                    </div>
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="/privacidade" class="text-decoration-none text-light">
+                            Política de Privacidade
+                        </a><br>
+                        <a href="/termos" class="text-decoration-none text-light">
+                            Termos de Uso
+                        </a><br>
+                        <a href="/quemsomos" class="text-decoration-none text-light">
+                            Quem Somos
+                        </a><br>
+                        <a href="/trocas" class="text-decoration-none text-light">
+                            Trocas e Devoluções
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="/contato" class="text-decoration-none text-light">
+                            Contato pelo Site
+                        </a><br>
+                        E-mail: <a href="mailto:email@dominio.com" class="text-decoration-none text-light">
+                            email@dominio.com
+                        </a><br>
+                        Telefone: <a href="phone:28999990000" class="text-decoration-none text-light">
+                            (28) 99999-0000
+                        </a>
+                        <img class="" style = "width: 500px; height: 75px;" src="{{ url_for('static', path='/img/compraSafe.png') }}" >
+                    
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', path='node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}" ></script> 
+</body>
+
+</html>

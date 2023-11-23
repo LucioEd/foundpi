@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<style>
+    .navbar-green{
+
+    background-color: rgb(95, 204, 162);
+    }
+    .abaixar{
+        height: 24px;
+    }
+    .text-invi{
+        color:rgb(95, 204, 162);
+    }
+</style>
+<nav class=" navbar abaixar navbar-expand-lg navbar-green bg-black border-bottom shadow-sm ">
+    <div class="container">
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav flex-grow-1 justify-content-center">
+                {% if filtro == False%}
+                {% for c in categorias %}
+                    <form method="post" action="/PorCategoria?idCategoria={{c.id}}" id="meuFormulario">
+                        <li class="nav-item">
+                            <a class="nav-link text-white text-invi" href="/PorCategoria?idCategoria={{c.id}}" id="meuLink">{{c.nome}}</a>
+                        </li>
+                    </form>
+                {% endfor %}
+                {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white text-invi" href="/" id="meuLink">Todos</a>
+                        </li>
+                {% endif %}
+            </ul>
+            <div class="align-self-end">
+                <ul class="navbar-nav">
+                    
+                    <li class="nav-item">
+                        
+                            <i class="bi-cart" style="font-size:24px;line-height:24px;"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+        <main class="flex-fill">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <form class="justify-content-center justify-content-md-start mb-3 mb-md-0">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control mt-3" placeholder="Digite aqui o que procura">
+                                <button class="btn btn-danger mt-3">Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-7 mt-3">
+                        <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start">
+                            <form class="d-inline-block">
+                                <select class="form-select form-select-sm">
+                                    <option>Ordenar pelo nome</option>
+                                    <option>Ordenar pelo menor preço</option>
+                                    <option>Ordenar pelo maior preço</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <hr mt-3>
+                <div class="row g-3">
+                    {% for p in produtos %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 bg-white border-0 ">
+                        <div class="card text-center bg-light shadow-lg">
+                            <a href="#" class="position-absolute end-0 p-2 text-danger shadow-lg">
+                                <i class="bi-suit-heart" style="font-size: 24px; line-height: 24px;"></i>
+                            </a>
+                            <a href="/produto?id={{ p.id }}">
+                                <img style="width: 200px; height: 250px;" src="/static/img/{{p.imgProduto }}" class="img-fluid card-img-top p-2 ">
+                            </a>
+                            <div class="card-header bg-white border-0 ">
+                                R${{ p.preco }}
+                            </div>
+                            <div class="card-body" style="width: 200px; height: 150px;">
+                                <h5 class="card-title">{{ p.nome }}</h5>
+                                {% if p.descricao|length > 63 %}
+                                <p class="card-text truncar-3l">
+                                    {{ p.descricao[:60] }}...
+                                </p>
+                                {% else %}
+                                <p class="card-text truncar-3l">
+                                    {{ p.descricao }}
+                                </p>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="card-footer bg-white border-0 ">
+                                <form method="POST" action="/" class="mt-2">
+                                    <input type="hidden" id="produto_id" name="produto_id" value="{{ p.id }}">
+                                    <input type="hidden" id="produto_idCategoria" name="produto_idCategoria" value="{{ p.idCategoria }}">
+                                    <input type="hidden" id="produto_nome" name="produto_nome" value="{{ p.nome }}">
+                                    <input type="hidden" id="produto_descricao" name="produto_descricao" value="{{ p.descricao }}">
+                                    <input type="hidden" id="produto_estoque" name="produto_estoque" value="{{ p.estoque }}">
+                                    <input type="hidden" id="produto_preco" name="produto_preco" value="{{ p.preco }}">
+                                    <input type="hidden" id="produto_img" name="produto_img" value="{{ p.imgProduto }}.jpg">
+                                    <button type="submit" class="btn btn-dark navbar-green d-block">
+                                        Adicionar ao Carrinho
+                                    </button>
+                                </form>
+                                <small class="text-success  ">{{ p.estoque }} em estoque</small>
+                            </div>
+                        </div>     
+                    </div>
+                    {% endfor %}
+                    
+                <hr class="mt-3">
+                <div class="row pb-3">
+                    <div class="col-12">
+                        {% if totalPaginas > 1 %}
+                            <nav>
+                                <ul class="pagination pagination-sm">
+                                    <li class="page-item">
+                                        <a class="page-link {{ 'disabled' if (paginaAtual == 1) }}" href="/?pa=1&tp={{ tamanhoPagina }}">
+                                            <i class="bi bi-arrow-left"></i>
+                                        </a>
+                                    </li>
+                            
+                                    <li class="page-item">
+                                        <a class="page-link {{ 'disabled' if (paginaAtual == 1) }}" href="/?pa={{ paginaAtual-1 }}&tp={{ tamanhoPagina }}">
+                                            <i class="bi bi-arrow-left-short"></i>
+                                        </a>
+                                    </li>
+                            
+                                    {% for i in range(totalPaginas) %}
+                                    <li class="page-item">
+                                        <a class="page-link {{ 'active' if (paginaAtual == i+1) }}" href="/?pa={{ i+1 }}&tp={{ tamanhoPagina }}">{{ i+1 }}</a>
+                                    </li>
+                                    {% endfor %}
+                            
+                                    <li class="page-item">
+                                        <a class="page-link {{ 'disabled' if (paginaAtual == totalPaginas) }}" href="/?pa={{ paginaAtual+1 }}&tp={{ tamanhoPagina }}">
+                                            <i class="bi bi-arrow-right-short"></i>
+                                        </a>
+                                    </li>
+                            
+                                    <li class="page-item">
+                                        <a class="page-link {{ 'disabled' if (paginaAtual == totalPaginas) }}" href="/?pa={{totalPaginas }}&tp={{ tamanhoPagina }}">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const link = document.querySelector('#meuLink'); // Selecione o link pelo ID
+                const formulario = document.getElementById('meuFormulario'); // Selecione o formulário pelo ID
+        
+                link.addEventListener('click', function (event) {
+                    formulario.submit(); // Submeta o formulário
+                });
+            });
+        </script>
+        {% endblock %}

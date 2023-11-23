@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block conteudo %}
+ 
+
+
+<main class="Back">
+  <div class="container save bg-found shadow p-3 formulario " style="filter: none;">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form method="post">
+          <h1 class="text-center text-dark">Login</h1>
+          <div class="form-group">
+            
+            <label class="text-dark" for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="text-dark" for="Senha">Senha</label>
+            <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" name="senha" required>
+          <div class="text-center">
+            <h4>ou</h4>
+            <a href="/cadastro" class="ForgotPass1">Faça o Cadastro</a>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Continuar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
